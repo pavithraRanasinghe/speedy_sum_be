@@ -1,17 +1,11 @@
-from typing import Union
-from fastapi import FastAPI
+from fastapi import Body, FastAPI, status
 
-from ml_summarization import summarize
+from src.models.user_model import User
+import src.services.user_service as user_service;
 
 app = FastAPI()
 
-
-@app.get("/")
-def read_root():
-    sum = summarize
-    return sum
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+@app.post("/save", response_description="Save new User", status_code=status.HTTP_201_CREATED, response_model=User)
+async def save(user: User = Body(...)):
+   res = await user_service.saveUser(user)
+   return res
