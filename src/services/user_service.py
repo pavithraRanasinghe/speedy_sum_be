@@ -9,6 +9,7 @@ users_collection = db.get_collection("users")
 async def saveUser(user: User):
     user = jsonable_encoder(user)
     result = await users_collection.insert_one(user)
+    print(result)
     res = await users_collection.find_one(
         {"_id": result.inserted_id}
     )
