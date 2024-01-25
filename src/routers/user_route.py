@@ -22,11 +22,9 @@ async def saveUser(user: User = Body(...)):
 
 @router.post("/login", response_description="Log in User", status_code=status.HTTP_200_OK, response_model=User)
 async def logIn(authRequest: AuthRequest = Body(...)):
-    print(authRequest)
-    doc = await users_collection.find_one({"email":authRequest.username, "password": authRequest.password})
+    user = await users_collection.find_one({"email":authRequest.username, "password": authRequest.password})
 
-    if not doc:
+    if not user:
         raise HTTPException(status_code=401, detail="Username & Password does not match")
     
-    print(doc)
-    return doc
+    return user
