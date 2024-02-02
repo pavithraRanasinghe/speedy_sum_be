@@ -41,7 +41,7 @@ async def web_page_summarize(request: TextSumRequest = Body(...)) -> Any:
     return SummaryResponse(summary= summary,keyPhrases= keyPhrases) # type: ignore
 
 
-@router.get("/history/{user_id}", response_description="Fetch History", status_code=status.HTTP_200_OK, response_model=HistoryResponse)
+@router.get("/history/{user_id}", response_description="Fetch History", status_code=status.HTTP_200_OK, response_model=list[HistoryResponse])
 async def find_history(user_id: int):
     articles = article_collection.find({"user.id": user_id})
     history_list = []

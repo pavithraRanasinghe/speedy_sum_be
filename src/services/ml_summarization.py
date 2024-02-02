@@ -1,13 +1,10 @@
 from transformers import (pipeline,BartForConditionalGeneration,BartTokenizer)
 
-# summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 # Load the summarization model
 summarizer = BartForConditionalGeneration.from_pretrained("facebook/bart-large-cnn")
 tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn")
 
 def summarize(articleData, keyphrases, minLength, maxLength):
-    # summarize_res = summarizer(data, max_length=max, min_length=min, do_sample=False)
-    # return ''.join(summary['summary_text'] for summary in summarize_res)  # type: ignore
 
     summaries = []
     for article in articleData:
