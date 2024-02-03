@@ -19,7 +19,7 @@ router = APIRouter(
 )
 
 @router.post("/text", response_description="Summarize from text", status_code=status.HTTP_200_OK, response_model=SummaryResponse)
-async def text_summarize(request: TextSumRequest = Body(...)) -> Any:
+async def text_summarize(request: TextSumRequest = Body(...)):
     keyPhrases = extract_keys(request.text)
     summary = summarize([request.text],keyPhrases, request.min, request.max)
     if(request.user != 0):
@@ -29,7 +29,7 @@ async def text_summarize(request: TextSumRequest = Body(...)) -> Any:
 
 
 @router.post("/link", response_description="Summarize from link", status_code=status.HTTP_200_OK, response_model=SummaryResponse)
-async def web_page_summarize(request: TextSumRequest = Body(...)) -> Any:
+async def web_page_summarize(request: TextSumRequest = Body(...)):
     try:
         articleSet = scrap_data(request.text)
         keyPhrases = extract_keys(articleSet)

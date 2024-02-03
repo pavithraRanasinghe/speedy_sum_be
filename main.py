@@ -15,9 +15,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    # res= summarize()
-    # print(res)
-    return {"Hello": "World"}
+    return "Server up"
 
 app.include_router(user_route.router)
 app.include_router(service_route.router)
